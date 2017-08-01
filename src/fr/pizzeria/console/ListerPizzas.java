@@ -2,20 +2,20 @@ package fr.pizzeria.console;
 
 public class ListerPizzas extends OptionMenu {
 	
-	private Pizza[] pizzas;
+	private IPizzaDao dao;
 
 	//Le Constructeur
-	public ListerPizzas (Pizza[] pizzas) {
-		this.pizzas = pizzas;
+	public ListerPizzas (IPizzaDao dao) {
+		this.dao = dao;
 	}
 
 	public void execute() {
 
 		System.out.println("Liste des pizzas");
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null) {
+		for (int i = 0; i < dao.findAllPizzas().length ; i++) {
+			if (dao.findAllPizzas()[i] != null) {
 				System.out.println(
-						pizzas[i].getCode() + " > " + pizzas[i].getLibelle() + " - Prix: " + pizzas[i].getPrix());
+						dao.findAllPizzas()[i].getCode() + " > " + dao.findAllPizzas()[i].getLibelle() + " - Prix: " + dao.findAllPizzas()[i].getPrix());
 			}
 		}
 		System.out.println("--------------------------------------------------");

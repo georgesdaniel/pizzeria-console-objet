@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class MiseaJourPizzas extends OptionMenu {
 	Scanner scanner = new Scanner(System.in);
-	private Pizza[] pizzas;
+	private IPizzaDao dao;
 
-	public MiseaJourPizzas(Pizza[] pizzas) {
-		this.pizzas = pizzas;
+	public MiseaJourPizzas(IPizzaDao dao) {
+		this.dao = dao;
 	}
 
 	public void execute() {

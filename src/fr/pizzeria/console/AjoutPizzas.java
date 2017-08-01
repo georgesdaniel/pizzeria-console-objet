@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class AjoutPizzas extends OptionMenu {
 	Scanner scanner = new Scanner(System.in);
-	private Pizza[] pizzas;
+	
+	private IPizzaDao dao;
 
-	public AjoutPizzas(Pizza[] pizzas) {
-		this.pizzas = pizzas;
+	public AjoutPizzas(IPizzaDao dao) {
+		this.dao = dao;
 	}
 
 	public void execute() {
@@ -16,19 +17,15 @@ public class AjoutPizzas extends OptionMenu {
 		String code = scanner.next();
 
 		System.out.println("Veuillez saisir le libellé (sans espace):");
-		String nom = scanner.next();
+		String libelle = scanner.next();
 
-		System.out.println("Veuillez saisir le prix:");
+		System.out.println("Veuillez asaisir le prix:");
 		String prixStr = scanner.next();
 		
 		double prix = Double.parseDouble(prixStr);
-
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] == null) {
-				pizzas[i] = new Pizza(code, nom, prix);
-				break;
-			}
-		}
+		
+		Pizza p = new Pizza(code, libelle, prix);
+		dao.saveNewPizza(p);
 	}
 
 }

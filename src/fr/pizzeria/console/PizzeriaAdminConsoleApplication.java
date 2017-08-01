@@ -10,16 +10,8 @@ public class PizzeriaAdminConsoleApplication {
 	public static void main(String[] args) {
 
 		// Initialisation d'un tableau de 100 pizzas
-		Pizza[] pizzas = new Pizza[100];
-		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.50);
-		pizzas[1] = new Pizza("MAR", "Margherita", 14.00);
-		pizzas[2] = new Pizza("REI", "La Reine", 11.50);
-		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12.00);
-		pizzas[4] = new Pizza("CAN", "La cannibale", 12.50);
-		pizzas[5] = new Pizza("SAV", "La savoyarde", 13.00);
-		pizzas[6] = new Pizza("ORI", "L'orientale", 13.50);
-		pizzas[7] = new Pizza("IND", "L'indienne", 14.00);
-
+		DaoMemoire dao = new DaoMemoire();
+		
 		// Initialisation du scanner qui va permettre de poser des questions à
 		// l'utilisateur
 		Scanner scanner = new Scanner(System.in);
@@ -30,23 +22,23 @@ public class PizzeriaAdminConsoleApplication {
 
 			switch (choix) {
 			case 1:
-				 ListerPizzas InstanceListePizza = new ListerPizzas (pizzas);
+				 ListerPizzas InstanceListePizza = new ListerPizzas (dao);
 				 InstanceListePizza.execute();
 				break;
 			
 			case 2:
 							
-				AjoutPizzas InstanceAjoutPizza = new AjoutPizzas (pizzas);
+				AjoutPizzas InstanceAjoutPizza = new AjoutPizzas (dao);
 				InstanceAjoutPizza.execute();
 				break;
 				
 			case 3:
-				MiseaJourPizzas InstanceMiseajourPizza = new MiseaJourPizzas (pizzas);
+				MiseaJourPizzas InstanceMiseajourPizza = new MiseaJourPizzas (dao);
 				InstanceMiseajourPizza.execute();
 				break;
 			
 			case 4:
-				SuppressionPizzas InstanceSuppressionPizza = new SuppressionPizzas (pizzas);
+				SuppressionPizzas InstanceSuppressionPizza = new SuppressionPizzas (dao);
 				InstanceSuppressionPizza.execute();
 				
 				break;
