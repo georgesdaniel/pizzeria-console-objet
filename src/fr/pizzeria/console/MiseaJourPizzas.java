@@ -14,7 +14,7 @@ public class MiseaJourPizzas extends OptionMenu {
 		System.out.println("Veuillez choisir la pizza à modifier.");
 		String codePizza = scanner.next();
 		int indexPizza = -1;
-		for (int i = 0; i < pizzas.length; i++) {
+		for (int i = 0; i < dao.length; i++) {
 			if (pizzas[i].getCode().equals(codePizza)) {
 				indexPizza = i;
 				break;
