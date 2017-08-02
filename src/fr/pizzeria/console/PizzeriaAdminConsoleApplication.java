@@ -3,7 +3,7 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-import fr.pizzeria.console.Pizza;
+import fr.pizzeria.exception.StockageException;
 
 public class PizzeriaAdminConsoleApplication {
 
@@ -34,7 +34,11 @@ public class PizzeriaAdminConsoleApplication {
 				
 			case 3:
 				MiseaJourPizzas InstanceMiseajourPizza = new MiseaJourPizzas (dao);
-				InstanceMiseajourPizza.execute();
+				try {
+					InstanceMiseajourPizza.execute();
+				} catch (StockageException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			
 			case 4:

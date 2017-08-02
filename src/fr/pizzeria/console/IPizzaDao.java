@@ -6,5 +6,5 @@ public interface IPizzaDao {
 	boolean saveNewPizza(Pizza pizza);
 	boolean updatePizza(String codePizza, Pizza pizza);
 	boolean deletePizza(String codePizza);
-
+	boolean exist (String code);
 }

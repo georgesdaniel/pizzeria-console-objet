@@ -1,12 +1,12 @@
 package fr.pizzeria.console;
 
 public class DaoMemoire implements IPizzaDao {
-	
+
 	Pizza[] pizzas;
-	
+
 	public DaoMemoire () {
-		
-		Pizza[] pizzas = new Pizza[100];
+
+		pizzas = new Pizza[100];
 		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.50);
 		pizzas[1] = new Pizza("MAR", "Margherita", 14.00);
 		pizzas[2] = new Pizza("REI", "La Reine", 11.50);
@@ -20,7 +20,7 @@ public class DaoMemoire implements IPizzaDao {
 
 	@Override
 	public Pizza[] findAllPizzas() {
-		
+
 		return pizzas;
 	}
 
@@ -37,17 +37,30 @@ public class DaoMemoire implements IPizzaDao {
 
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
-	
+
+		int indexPizza = -1;
 		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null) {
-				System.out.println(
-						pizzas[i].getCode() + " > " + pizzas[i].getLibelle() + " - Prix: " + pizzas[i].getPrix());
+			if (pizzas[i] != null && pizzas[i].getCode().equals(codePizza) ) {
+				indexPizza = i;
+				break;
 			}
 		}
-		
-		
-		
+		if (indexPizza!=-1) {
+			pizzas[indexPizza] = pizza;
+		}
+
 		return false;
+	}
+
+	public boolean exist(String code) {
+
+		boolean trouve = false;
+		for (int i=0; i<pizzas.length; i++) {
+			if ((pizzas[i]!= null) && pizzas[i].getCode().equals(code) ) {
+				trouve = true;
+			}
+		}
+		return trouve;
 	}
 
 	@Override

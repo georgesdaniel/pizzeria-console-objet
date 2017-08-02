@@ -2,6 +2,9 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
+import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.exception.UpdatePizzaException;
+
 public class MiseaJourPizzas extends OptionMenu {
 	Scanner scanner = new Scanner(System.in);
 	private IPizzaDao dao;
@@ -10,32 +13,30 @@ public class MiseaJourPizzas extends OptionMenu {
 		this.dao = dao;
 	}
 
-	public void execute() {
+	public void execute() throws StockageException {
 		System.out.println("Veuillez choisir la pizza à modifier.");
 		String codePizza = scanner.next();
-		int indexPizza = -1;
-		for (int i = 0; i < dao.length; i++) {
-			if (pizzas[i].getCode().equals(codePizza)) {
-				indexPizza = i;
-				break;
-			}
+
+		codePizza = codePizza.toUpperCase();
+
+		boolean resultat = dao.exist(codePizza);
+
+		if (resultat == false) {
+			throw new UpdatePizzaException("Cette pizza n'existe pas dans notre restaurant");
 		}
 
-		if (indexPizza != -1) {
-			System.out.println("Veuillez saisir le code:");
-			String code = scanner.next();
+		System.out.println("Veuillez saisir le code:");
+		String code = scanner.next();
 
-			System.out.println("Veuillez saisir le nom (sans espace):");
-			String nom = scanner.next();
+		System.out.println("Veuillez saisir le nom (sans espace):");
+		String nom = scanner.next();
 
-			System.out.println("Veuillez saisir le prix:");
-			String prixStr = scanner.next();
+		System.out.println("Veuillez saisir le prix:");
+		String prixStr = scanner.next();
 
-			Double prix = Double.parseDouble(prixStr);
+		Double prix = Double.parseDouble(prixStr);
 
-			pizzas[indexPizza] = new Pizza(code, nom, prix);
-		} else {
-			System.out.println("Code inexistant :" + codePizza);
-		}
+		Pizza q = new Pizza(code, nom, prix);
+		dao.updatePizza(codePizza, q);
 	}
 }
